@@ -1,3 +1,63 @@
+plyframes={
+	-- up={
+		-- loadfilter("ply/up1.png"),
+		-- loadfilter("ply/up2.png"),
+		-- loadfilter("ply/up3.png")
+	-- },
+	-- down={
+		-- loadfilter("ply/down1.png"),
+		-- loadfilter("ply/down2.png"),
+		-- loadfilter("ply/down3.png")	
+	-- },
+	left={
+		loadfilter("ply/left1.png"),
+		loadfilter("ply/left2.png"),
+		loadfilter("ply/left3.png"),
+		loadfilter("ply/left2.png"),
+		
+	},
+	right={
+		loadfilter("ply/right1.png"),
+		loadfilter("ply/right2.png"),
+		loadfilter("ply/right3.png"),
+		loadfilter("ply/right2.png"),
+	}	,
+	-- pright={
+		-- loadfilter("ply/pright1.png"),
+		-- -- loadfilter("ply/right2.png"),
+		-- -- loadfilter("ply/right3.png")
+	-- }	,
+	-- pleft={
+		-- loadfilter("ply/pleft1.png"),
+		-- -- loadfilter("ply/left2.png"),
+		-- -- loadfilter("ply/left3.png")
+		
+	-- },
+	-- sright={
+		-- loadfilter("ply/sright1.png"),
+		-- -- loadfilter("ply/right2.png"),
+		-- -- loadfilter("ply/right3.png")
+	-- }	,
+	-- sleft={
+		-- loadfilter("ply/sleft1.png"),
+		-- -- loadfilter("ply/left2.png"),
+		-- -- loadfilter("ply/left3.png")
+		
+	-- },
+	-- dright={
+		-- loadfilter("ply/dright1.png"),
+		-- -- loadfilter("ply/right2.png"),
+		-- -- loadfilter("ply/right3.png")
+	-- }	,
+	-- dleft={
+		-- loadfilter("ply/dleft1.png"),
+		-- -- loadfilter("ply/left2.png"),
+		-- -- loadfilter("ply/left3.png")
+		
+	-- },
+}
+
+
 
 local punch={
 	x=32,
@@ -37,7 +97,8 @@ end
 
 
 function dwalk()
-	love.graphics.setColor(0.0,1.0,0.0,1.0)
+	love.graphics.draw(plyframes.right[a4step].pic,ply.x,ply.y)
+	love.graphics.setColor(0.0,1.0,0.0,0.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
 
 

@@ -1,8 +1,36 @@
 
 
+function tickanimstep()
+	 animclk=animclk+1
+
+	 if animclk>animchge then 
+		animclk=0
+		animstep=animstep+1
+		if animstep>3 then
+		 animstep=1
+		end
+		a4step=a4step+1
+		if a4step>4 then
+		 a4step=1
+		end
+		a5step=a5step+1
+		if a5step>5 then
+		 a5step=1
+		end
+
+	 end 
+end
 
 
 function initgame()
+	
+	animstep=1
+	a5step=1
+	a4step=1
+	animclk=0
+	animchge=10
+
+	
 	
 	groundy=440
 	
@@ -56,6 +84,9 @@ end
 
 
 function updategame()
+
+	tickanimstep()
+
 
 	ply.bfunc(ply)
 

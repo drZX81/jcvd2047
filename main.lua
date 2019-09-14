@@ -1,3 +1,4 @@
+require('loadfilter')
 require('coll')
 require ('game')
 require('ply')
@@ -20,7 +21,7 @@ function love.load()
 	-- table.insert(gos,e1)
 	-- e2={x=400,y=0}
 	-- table.insert(gos,e2)
-—- modification 
+--	modification 
 	initgame()
 
 end
