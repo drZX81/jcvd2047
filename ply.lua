@@ -22,11 +22,11 @@ plyframes={
 		loadfilter("ply/right3.png"),
 		loadfilter("ply/right2.png"),
 	}	,
-	-- pright={
-		-- loadfilter("ply/pright1.png"),
+	pright={
+		loadfilter("ply/pright1.png"),
 		-- -- loadfilter("ply/right2.png"),
 		-- -- loadfilter("ply/right3.png")
-	-- }	,
+	}	,
 	-- pleft={
 		-- loadfilter("ply/pleft1.png"),
 		-- -- loadfilter("ply/left2.png"),
@@ -55,6 +55,7 @@ plyframes={
 		-- -- loadfilter("ply/left3.png")
 		
 	-- },
+	
 }
 
 
@@ -109,11 +110,11 @@ end
 -- we just wait before going back to walk
 
 function dpunch()
-	love.graphics.setColor(0.0,1.0,0.0,1.0)
+	love.graphics.setColor(0.0,1.0,0.0,.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
-	love.graphics.setColor(1.0,0.0,0.0,1.0)
+	love.graphics.setColor(1.0,0.0,0.0,.5)
 	love.graphics.rectangle('fill',ply.x+ply.w/2+punch.x,ply.y+punch.y,punch.w,punch.h)
-
+	love.graphics.draw(plyframes.pright[1].pic,ply.x,ply.y)
 end
 
 function topunchstate()
