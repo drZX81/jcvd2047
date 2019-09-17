@@ -33,8 +33,11 @@ function initgame()
 	
 	
 	groundy=440
+	upperlevely=200
 	
 	ground={x=0,y=groundy,w=640,h=40}
+	
+	upperlevel={x=0,y=upperlevely,w=640,h=40}
 	
 	-- ship = love.graphics.newImage('ship.png')
 	-- ply={x=100,y=groundy-128,w=64,h=128}
@@ -59,6 +62,12 @@ function drawgame()
 	
 	
 	love.graphics.print(msg)
+
+
+	--ground
+	love.graphics.setColor(0.0,0.0,1.0,1.0)
+	love.graphics.rectangle('fill',upperlevel.x,upperlevel.y,upperlevel.w,upperlevel.h)
+
 	
 	--ground
 	love.graphics.setColor(0.0,0.0,1.0,1.0)

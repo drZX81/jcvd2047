@@ -93,6 +93,14 @@ function plywalk()
 		topunchstate(ply)
 	end
 
+	if love.keyboard.isDown('up') then
+		totrans('u')
+	end
+
+	if love.keyboard.isDown('down') then
+		totrans('d')
+	end
+
 
 end
 
@@ -141,7 +149,36 @@ function plypunch()
 		-- love.graphics.draw(ship,e.x,e.y)
 	
 	end
-	
-
-
 end
+
+-- transition to upper or inferior level
+local tdir=nil
+function totrans(lvl)
+	tdir=lvl
+	ply.bfunc=updtrans
+	ply.dfunc=dtrans
+	
+end
+
+function dtrans()
+	love.graphics.draw(plyframes.left[1].pic,ply.x,ply.y)
+end
+
+function updtrans()
+	if tdir=='u' then 
+		ply.y=ply.y-3
+		if ply.y+128<=upperlevel.y then
+			ply.y=upperlevel.y-128
+			towalkstate(ply)
+		end
+	elseif tdir=='d' then 
+		ply.y=ply.y+3
+		if ply.y+128>=ground.y then
+			ply.y=ground.y-128
+			towalkstate(ply)
+		end
+		
+	end
+end	
+
+

@@ -3,7 +3,7 @@ require('coll')
 require ('game')
 require('ply')
 require('shaders')
---trabiboy was here
+--TODO ennemy bhv
 msg='welcome'
 
 drawfunc=nil
