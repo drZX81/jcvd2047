@@ -60,7 +60,7 @@ plyframes={
 
 
 
-local punch={
+local plypunch={
 	x=32,
 	y=0,
 	w=64,
@@ -70,14 +70,14 @@ local punch={
 function initplayer()
 
 	ply={x=100,y=groundy-128,w=64,h=128}
-	towalkstate(ply)
+	plytowalkstate(ply)
 
 end
 
-function towalkstate(ply)
+function plytowalkstate(ply)
 	msg='walk'
 	ply.bfunc=plywalk
-	ply.dfunc=dwalk
+	ply.dfunc=dplywalk
 end
 
 function plywalk()
@@ -90,22 +90,22 @@ function plywalk()
 	end
 
 	if love.keyboard.isDown('space') then
-		topunchstate(ply)
+		plytopunchstate(ply)
 	end
 
 	if love.keyboard.isDown('up') then
-		totrans('u')
+		plytotrans('u')
 	end
 
 	if love.keyboard.isDown('down') then
-		totrans('d')
+		plytotrans('d')
 	end
 
 
 end
 
 
-function dwalk()
+function dplywalk()
 	love.graphics.draw(plyframes.right[a4step].pic,ply.x,ply.y)
 	love.graphics.setColor(0.0,1.0,0.0,0.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
@@ -117,31 +117,31 @@ end
 
 -- we just wait before going back to walk
 
-function dpunch()
+function dplypunch()
 	love.graphics.setColor(0.0,1.0,0.0,.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
 	love.graphics.setColor(1.0,0.0,0.0,.5)
-	love.graphics.rectangle('fill',ply.x+ply.w/2+punch.x,ply.y+punch.y,punch.w,punch.h)
+	love.graphics.rectangle('fill',ply.x+ply.w/2+plypunch.x,ply.y+plypunch.y,plypunch.w,plypunch.h)
 	love.graphics.draw(plyframes.pright[1].pic,ply.x,ply.y)
 end
 
-function topunchstate()
+ function plytopunchstate()
 	msg=' punch state '
-	ply.bfunc=plypunch
-	ply.dfunc=dpunch
+	ply.bfunc=updplypunch
+	ply.dfunc=dplypunch
 	ply.timer=60
 end
 
-function plypunch()
+function updplypunch()
 	ply.timer=ply.timer-1
 	if ply.timer<1 then
-		towalkstate(ply)
+		plytowalkstate(ply)
 	end
 
 --see if any ennemy is hit
 	for i,e in ipairs (gos)
 	do
-		if coll(ply.x+ply.w/2+punch.x,ply.y+punch.y,punch.w,punch.h,e.x,e.y,e.w,e.h) then
+		if coll(ply.x+ply.w/2+plypunch.x,ply.y+plypunch.y,plypunch.w,plypunch.h,e.x,e.y,e.w,e.h) then
 			msg='hit'
 		end
 		-- love.graphics.setColor(0.0,1.0,0.0,1.0)
@@ -153,29 +153,29 @@ end
 
 -- transition to upper or inferior level
 local tdir=nil
-function totrans(lvl)
+function plytotrans(lvl)
 	tdir=lvl
-	ply.bfunc=updtrans
-	ply.dfunc=dtrans
+	ply.bfunc=plyupdtrans
+	ply.dfunc=dplytrans
 	
 end
 
-function dtrans()
+function dplytrans()
 	love.graphics.draw(plyframes.left[1].pic,ply.x,ply.y)
 end
 
-function updtrans()
+function plyupdtrans()
 	if tdir=='u' then 
 		ply.y=ply.y-3
 		if ply.y+128<=upperlevel.y then
 			ply.y=upperlevel.y-128
-			towalkstate(ply)
+			plytowalkstate(ply)
 		end
 	elseif tdir=='d' then 
 		ply.y=ply.y+3
 		if ply.y+128>=ground.y then
 			ply.y=ground.y-128
-			towalkstate(ply)
+			plytowalkstate(ply)
 		end
 		
 	end
