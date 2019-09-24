@@ -1,4 +1,4 @@
-plyframes={
+local plyframes={
 	-- up={
 		-- loadfilter("ply/up1.png"),
 		-- loadfilter("ply/up2.png"),
@@ -67,20 +67,11 @@ local plypunch={
 	h=64
 }
 
-function initplayer()
 
-	ply={x=100,y=groundy-128,w=64,h=128}
-	plytowalkstate(ply)
 
-end
 
-function plytowalkstate(ply)
-	msg='walk'
-	ply.bfunc=plywalk
-	ply.dfunc=dplywalk
-end
 
-function plywalk()
+local function plywalk()
 
 	if love.keyboard.isDown('left') then
 		ply.x=ply.x-1
@@ -105,7 +96,7 @@ function plywalk()
 end
 
 
-function dplywalk()
+local function dplywalk()
 	love.graphics.draw(plyframes.right[a4step].pic,ply.x,ply.y)
 	love.graphics.setColor(0.0,1.0,0.0,0.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
@@ -113,11 +104,24 @@ function dplywalk()
 
 end
 
+local function plytowalkstate(ply)
+	msg='walk'
+	ply.bfunc=plywalk
+	ply.dfunc=dplywalk
+end
 
+
+--extern interface
+function initplayer()
+
+	ply={x=100,y=groundy-128,w=64,h=128}
+	plytowalkstate(ply)
+
+end
 
 -- we just wait before going back to walk
 
-function dplypunch()
+local function dplypunch()
 	love.graphics.setColor(0.0,1.0,0.0,.5)
 	love.graphics.rectangle('fill',ply.x,ply.y,ply.w,ply.h)
 	love.graphics.setColor(1.0,0.0,0.0,.5)
@@ -125,14 +129,7 @@ function dplypunch()
 	love.graphics.draw(plyframes.pright[1].pic,ply.x,ply.y)
 end
 
- function plytopunchstate()
-	msg=' punch state '
-	ply.bfunc=updplypunch
-	ply.dfunc=dplypunch
-	ply.timer=60
-end
-
-function updplypunch()
+local function updplypunch()
 	ply.timer=ply.timer-1
 	if ply.timer<1 then
 		plytowalkstate(ply)
@@ -150,6 +147,15 @@ function updplypunch()
 	
 	end
 end
+
+
+ function plytopunchstate()
+	msg=' punch state '
+	ply.bfunc=updplypunch
+	ply.dfunc=dplypunch
+	ply.timer=60
+end
+
 
 -- transition to upper or inferior level
 local tdir=nil
